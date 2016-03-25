@@ -31,7 +31,7 @@ class EPUBMakerCmdTest < Test::Unit::TestCase
 
       ruby_cmd = File.join(RbConfig::CONFIG['bindir'], RbConfig::CONFIG['ruby_install_name'])
       Dir.chdir(@tmpdir1) do
-        system("#{ruby_cmd} -S #{REVIEW_EPUBMAKER} config.yml 1>/dev/null 2>/dev/null")
+        system("#{ruby_cmd} -S #{REVIEW_EPUBMAKER} config.yml 1>#{null_device} 2>#{null_device}")
       end
 
       assert File.exist?(builddir)
