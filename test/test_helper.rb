@@ -47,3 +47,15 @@ def compile_block_idgxml(text)
   @chapter.content = text
   @compiler.compile(@chapter).gsub(/.*<doc xmlns:aid="http:\/\/ns.adobe.com\/AdobeInDesign\/4.0\/">/m,"").gsub(/<\/doc>\n/, "")
 end
+
+NUL_DEV = begin
+            require 'win32ole'
+            "nul"
+          rescue LoadError
+            "/dev/null"
+          end
+
+def null_device
+  NUL_DEV
+end
+
