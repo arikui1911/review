@@ -350,7 +350,8 @@ module ReVIEW
                .strip.lines.map {|line| line.strip }.join("\n").split(/\n{2,}/)\
                .map {|part_chunk|
           chaps = part_chunk.split.map {|chapid|
-            Chapter.new(self, (num += 1), chapid, "#{@basedir}/#{chapid}")
+            path = chapid.start_with?(@basedir) ? chapid : "#{@basedir}/#{chapid}"
+            Chapter.new(self, (num += 1), chapid, path)
           }
           if part_exist? && read_PART.split("\n").size > part
             Part.new(self, (part += 1), chaps, read_PART.split("\n")[part-1])
